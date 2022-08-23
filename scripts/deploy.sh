@@ -19,4 +19,5 @@ else
 fi
 
 echo "> $JAR_PATH 배포"
-nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
+#nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
+nohup java -jar -Dspring.profiles.active=dev $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
