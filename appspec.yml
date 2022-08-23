@@ -4,14 +4,14 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ec2-user/cicdproject
+    destination: /home/ubuntu/cicdproject
 permissions:
   - object: /home/ec2-user/cicdproject/
-    owner: cicd-test
-    group: cicd-test
+    owner: ubuntu
+    group: ubuntu
 
 hooks:
   AfterInstall:
     - location: scripts/deploy.sh
       timeout: 60
-      runas: cicd-test
+      runas: ubuntu
