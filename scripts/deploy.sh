@@ -19,4 +19,4 @@ else
 fi
 
 echo "> $JAR_PATH/$JAR_NAME 배포"
-nohup java -jar $JAR_PATH 2>&1 &
+nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
