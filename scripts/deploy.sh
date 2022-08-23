@@ -18,5 +18,5 @@ else
   sleep 5
 fi
 
-echo "> $JAR_PATH 배포"
+echo "> $JAR_PATH/$JAR_NAME 배포"
 nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
