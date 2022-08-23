@@ -1,22 +1,11 @@
 #!/usr/bin/env bash
 
-REPOSITORY=/home/ubuntu/cicdproject
-cd $REPOSITORY
+REPOSITORY=/home/ubuntu/app
 
-APP_NAME=cicdproject
-JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep 'SNAPSHOT.jar' | tail -n 1)
-JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
+lsof -P -i :8080 |grep java |awk '{print $2}' |xargs kill -9
 
-CURRENT_PID=$(pgrep -f $APP_NAME)
+JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
 
-if [ -z $CURRENT_PID ]
-then
-  echo "> 종료할것 없음."
-else
-  echo "> kill -9 $CURRENT_PID"
-  kill -15 $CURRENT_PID
-  sleep 5
-fi
+chmod +x $JAR_NAME
 
-echo "> $JAR_PATH/$JAR_NAME 배포"
-nohup java -jar $JAR_PATH > /dev/null 2> /dev/null < /dev/null &
+nohup java -jar -Dspring.profiles.active=dev $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
